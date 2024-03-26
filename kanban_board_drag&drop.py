@@ -12,7 +12,7 @@ options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(options=options)
 wait = WebDriverWait(driver, 10)
 
-driver.get("https://worklenz.com/auth")
+driver.get("https://app.worklenz.com/auth")
 driver.maximize_window()
 doing_status_tasks_details = []
 done_status_tasks_details = []
@@ -87,15 +87,24 @@ def before_get_done_status_tasks():  # before drag and drop get done status task
 
 def task_drag_and_drop():
     board_wrapper = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "board-wrapper")))
-    doing_status = board_wrapper.find_elements(By.CLASS_NAME, "board-column")[1]
-    fromElement = doing_status.find_elements(By.CLASS_NAME, "task")[0]
-
+    to_do_status = board_wrapper.find_elements(By.CLASS_NAME, "board-column")[0]
+    fromElement = to_do_status.find_elements(By.CLASS_NAME, "task")
+    if len(fromElement) == 0:
+        add_task_btn = to_do_status.find_element(By.XPATH, "(//div[@class='column-footer'])[1]")
+        add_task_btn.click()
+        enter_task_name = wait.until(
+            EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter task name']")))
+        enter_task_name.send_keys("testing_tasks")
+        btn_elements = driver.find_elements(By.CLASS_NAME, "add-task-btn-card")
+        print(len(btn_elements))
+        time.sleep(1)
     board_wrapper = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "board-wrapper")))
     done_status = board_wrapper.find_elements(By.CLASS_NAME, "board-column")[2]
     toElement = done_status.find_element(By.CLASS_NAME, "tasks-container")
 
     actions = ActionChains(driver)
     actions.click_and_hold(fromElement).move_to_element(toElement).release(toElement).perform()
+    time.sleep(2)
 
 
 def after_get_doing_status_tasks():  # after drag and drop get doing status tasks and store
