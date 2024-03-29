@@ -12,7 +12,7 @@ options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(options=options)
 wait = WebDriverWait(driver, 10)
 
-driver.get("https://app.worklenz.com/auth")
+driver.get("https://uat.app.worklenz.com/auth")
 driver.maximize_window()
 doing_status_tasks_details = []
 done_status_tasks_details = []
@@ -25,9 +25,9 @@ def main():
 
 def login():
     wait.until(EC.visibility_of_element_located((By.XPATH, "//input[@placeholder='Email']"))).send_keys(
-        "coyonic318@hupoi.com")
+        "bsdcsd@v.com")
     wait.until(EC.visibility_of_element_located((By.XPATH, "//input[@placeholder='Password']"))).send_keys(
-        "Test@12345")
+        "ceyDigital#00")
     wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Log in']"))).click()
     time.sleep(10)
 
@@ -49,7 +49,7 @@ def check_project_segment():
 def go_to_need_project_inside():
     t_body = driver.find_element(By.TAG_NAME, "tbody")
     t_body.find_elements(By.TAG_NAME, "tr")[0].click()
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//a[normalize-space()='Board']"))).click()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Board']"))).click()
     time.sleep(6)
 
 
@@ -88,16 +88,17 @@ def before_get_done_status_tasks():  # before drag and drop get done status task
 def task_drag_and_drop():
     board_wrapper = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "board-wrapper")))
     to_do_status = board_wrapper.find_elements(By.CLASS_NAME, "board-column")[0]
-    fromElement = to_do_status.find_elements(By.CLASS_NAME, "task")
-    if len(fromElement) == 0:
+    fromElements = to_do_status.find_elements(By.CLASS_NAME, "task")
+    if len(fromElements) == 0:
         add_task_btn = to_do_status.find_element(By.XPATH, "(//div[@class='column-footer'])[1]")
         add_task_btn.click()
         enter_task_name = wait.until(
             EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter task name']")))
-        enter_task_name.send_keys("testing_tasks")
-        btn_elements = driver.find_elements(By.CLASS_NAME, "add-task-btn-card")
-        print(len(btn_elements))
+        enter_task_name.send_keys("testing_tasks", Keys.ENTER)
+        fromElement = to_do_status.find_elements(By.CLASS_NAME, "task")[0]
         time.sleep(1)
+    else:
+        fromElement = to_do_status.find_elements(By.CLASS_NAME, "task")[0]
     board_wrapper = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "board-wrapper")))
     done_status = board_wrapper.find_elements(By.CLASS_NAME, "board-column")[2]
     toElement = done_status.find_element(By.CLASS_NAME, "tasks-container")
