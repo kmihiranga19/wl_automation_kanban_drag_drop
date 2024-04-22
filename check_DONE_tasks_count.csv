@@ -1,4 +1,4 @@
 status_name,tasks
-DONE_before_drag_drop,"['Testing and Verification', ""Ricardo Arnold's task"", ""Glenn Hall's task""]"
-DONE_after_drag_drop,"['Testing and Verification', ""Marcus Lang's task"", ""Ricardo Arnold's task"", ""Glenn Hall's task""]"
+DONE_before_drag_drop,"['Bug Closure', 'Documentation', 'Reporting', 'testing_tasks', 'Bug Prioritization', 'testing_tasks']"
+DONE_after_drag_drop,"['Bug Closure', 'Documentation', 'Reporting', 'testing_tasks', 'Bug Prioritization', 'testing_tasks', 'testing_tasks']"
 ,

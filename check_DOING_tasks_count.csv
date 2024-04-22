@@ -1,4 +1,4 @@
 status_name,tasks
-DOING_before_drag_drop,"[""Marcus Lang's task"", ""Amanda Myers's task"", ""Christina Owens's task""]"
-DOING_after_drag_drop,"[""Amanda Myers's task"", ""Christina Owens's task""]"
+DOING_before_drag_drop,"['Bug Assignment', 'Bug reporting', 'Testing and Verification']"
+DOING_after_drag_drop,"['Bug Assignment', 'Bug reporting', 'Testing and Verification']"
 ,
